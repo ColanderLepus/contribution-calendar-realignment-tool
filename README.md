@@ -1,5 +1,5 @@
 # 📅 Contribution Graph Realignment Tool
-A browser extension by The GitHub Temporal Correction Initiative. Restores chronological integrity to GitHub's contribution graph. Because Monday comes first!
+A browser extension by The GitHub Temporal Correction Initiative, dedicated to restoring chronological integrity to GitHub's contribution graph. Because Monday comes first!
 
 ## 📜 Mission Statement
 The GitHub Temporal Correction Initiative (GTCI) exists to restore harmony between digital representation and temporal reality.

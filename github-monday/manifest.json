@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Monday-Start GitHub Calendar",
+  "version": "1.0",
+  "description": "Shifts the GitHub contribution calendar week to start on Monday.",
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "icons": {
+    "16": "icon16.png"
+  }
+}

@@ -6,19 +6,12 @@ function startWeekOnMonday(table) {
       // 1. Move the Sunday row (index 0) to the bottom.
       const sundayRow = tbody.rows[0];
       tbody.appendChild(sundayRow);
-      
-      // 2. The Sunday row, when moved to the bottom, needs its contribution data shifted.
-      // Since the calendar graph is a rolling window, moving the Sunday row to the end
-      // requires dropping the *oldest* Sunday contribution cell (index 1) to align the remaining 
-      // contributions with the now Monday-started week columns
+      // 2. Shift Sunday row's contribution data
       const lastRow = tbody.rows[tbody.rows.length - 1];
       if (lastRow.cells && lastRow.cells.length >= 2) {
          lastRow.deleteCell(1);
       }
-
-      // 3. Fix the visibility of the "Sun" label. The default GitHub design 
-      // uses an inline style (clip-path: Circle(0)) to hide the "Sun" label. 
-      // We override this to 'None' to make it visible.
+      // 3. Fix the visibility of the "Sun" label
       if (lastRow.cells && lastRow.cells.length > 0) {
          const labelCell = lastRow.cells[0];
          const span = labelCell.querySelector('span[aria-hidden="true"]');

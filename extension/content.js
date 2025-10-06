@@ -4,7 +4,6 @@ function startWeekOnMonday(table) {
    if (tbody && tbody.rows.length === 7) {
       
       // 1. Move the Sunday row (index 0) to the bottom.
-      // GitHub structures the days as rows starting with Sunday.   
       const sundayRow = tbody.rows[0];
       tbody.appendChild(sundayRow);
       

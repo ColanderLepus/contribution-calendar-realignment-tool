@@ -1,16 +1,21 @@
 function startWeekOnMonday(table) {
+   
    // Prevent repeated modification
    if (table.dataset.weekMondayCorrected) return;
+   
    const tbody = table.querySelector('tbody');
    if (tbody && tbody.rows.length === 7) {
+      
       // 1. Move the Sunday row (index 0) to the bottom.
       const sundayRow = tbody.rows[0];
       tbody.appendChild(sundayRow);
+      
       // 2. Shift Sunday row's contribution data
       const lastRow = tbody.rows[tbody.rows.length - 1];
       if (lastRow.cells && lastRow.cells.length >= 2) {
          lastRow.deleteCell(1);
       }
+      
       // 3. Fix the visibility of the "Sun" label
       if (lastRow.cells && lastRow.cells.length > 0) {
          const labelCell = lastRow.cells[0];
@@ -20,7 +25,8 @@ function startWeekOnMonday(table) {
             span.setAttribute('style', newStyle);
          }
       }
-      // Mark as corrected
+
+      // 4. Mark as corrected
       table.dataset.weekMondayCorrected = 'true';
    }
 }
@@ -28,11 +34,13 @@ function startWeekOnMonday(table) {
 // --- Initialization and MutationObserver Logic ---
 
 function observeTable() {
+   
    // Try to correct immediately
    const table = document.querySelector('.ContributionCalendar-grid');
    if (table) {
       startWeekOnMonday(table);
    }
+   
    // Observe for future changes
    const observer = new MutationObserver(() => {
       const table = document.querySelector('.ContributionCalendar-grid');
@@ -40,6 +48,8 @@ function observeTable() {
          startWeekOnMonday(table);
       }
    });
+
+   // Start observing the body for changes
    observer.observe(document.body, {
       childList: true,
       subtree: true
@@ -52,7 +62,6 @@ function observeTable() {
       }
    }, 5000);
 }
-
 
 // Safe URL change detection
 function onUrlChange(callback) {
@@ -67,6 +76,7 @@ function onUrlChange(callback) {
    setInterval(checkUrl, 500);
 }
 
+// Main entry point
 function main() {
    observeTable();
    onUrlChange(() => {
@@ -74,6 +84,7 @@ function main() {
    });
 }
 
+// Run main when DOM is ready
 if (document.readyState === 'loading') {
    document.addEventListener('DOMContentLoaded', main);
 } else {

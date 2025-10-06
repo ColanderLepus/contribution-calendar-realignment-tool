@@ -1,5 +1,5 @@
-# 📅 Contribution Calendar Realignment Tool
-A browser extension by The GitHub Temporal Correction Initiative. Restores chronological integrity to GitHub's contribution calendar. Because Monday comes first!
+# 📅 Contribution Graph Realignment Tool
+A browser extension by The GitHub Temporal Correction Initiative. Restores chronological integrity to GitHub's contribution graph. Because Monday comes first!
 
 ## 📜 Mission Statement
 The GitHub Temporal Correction Initiative (GTCI) exists to restore harmony between digital representation and temporal reality.
@@ -8,7 +8,7 @@ We reject this inversion of logic and pledge to uphold the universally acknowled
 
 ## 🧭 Founding Principles
 1. **Temporal Integrity:** Time shall flow as it was intended: From Monday through Sunday, without distortion.
-2. **Visual Order:** The contribution calendar must reflect this truth in both form and function.
+2. **Visual Order:** The contribution graph must reflect this truth in both form and function.
 3. **Minimal Disruption:** Correction shall occur silently, elegantly, and without user intervention.
 4. **Universal Accessibility:** Every developer deserves a world where Monday comes first, regardless of timezone or tradition.
 5. **Mild Defiance:** Every small act of rebellion against chronological absurdity brings us closer to order.

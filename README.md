@@ -26,7 +26,7 @@ This extension is a small act of rebellion against chronological chaos.
 
 ## 🔧 Features (The Simple Fix)
 ### Chronological Correction:
-Moves the entire Sunday row to the bottom of the contribution grid.
+Moves the entire Sunday row to the bottom of the contribution graph.
 ### Visual Alignment:
 Automatically shifts the contribution squares and reveals the "Sun" label for perfect, Monday-aligned symmetry.
 ### Zero Configuration:

@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Monday-Start GitHub Calendar",
   "version": "1.0",
-  "description": "Shifts the GitHub contribution calendar week to start on Monday.",
+  "description": "A browser extension by the GitHub Temporal Correction Initiative. Dedicated to restoring chronological integrity to GitHub’s contribution calendar. Because Monday comes first!",
   "content_scripts": [
     {
       "matches": ["https://github.com/*"],

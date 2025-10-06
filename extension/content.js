@@ -44,10 +44,12 @@ function observeTable() {
       childList: true,
       subtree: true
    });
-   
-   // Stop observing after a timeout to avoid infinite observation
+
+   // Disconnect observer if .js-yearly-contributions is not present after 5 seconds
    setTimeout(() => {
-      observer.disconnect();
+      if (!document.querySelector('.js-yearly-contributions')) {
+         observer.disconnect();
+      }
    }, 5000);
 }
 

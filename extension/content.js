@@ -1,8 +1,8 @@
 function startWeekOnMonday(table) {
+   // Prevent repeated modification
+   if (table.dataset.weekMondayCorrected) return;
    const tbody = table.querySelector('tbody');
-   
    if (tbody && tbody.rows.length === 7) {
-      
       // 1. Move the Sunday row (index 0) to the bottom.
       const sundayRow = tbody.rows[0];
       tbody.appendChild(sundayRow);
@@ -20,30 +20,26 @@ function startWeekOnMonday(table) {
             span.setAttribute('style', newStyle);
          }
       }
+      // Mark as corrected
+      table.dataset.weekMondayCorrected = 'true';
    }
 }
 
 // --- Initialization and MutationObserver Logic ---
 
 function observeTable() {
-   
-   // Check if the table is already present
+   // Try to correct immediately
    const table = document.querySelector('.ContributionCalendar-grid');
    if (table) {
       startWeekOnMonday(table);
-      return;
    }
-
-   // If not, set up a MutationObserver to watch for it
-   const observer = new MutationObserver((mutations, obs) => {
+   // Observe for future changes
+   const observer = new MutationObserver(() => {
       const table = document.querySelector('.ContributionCalendar-grid');
       if (table) {
          startWeekOnMonday(table);
-         obs.disconnect();
       }
    });
-   
-   // Start observing the body for changes (new content loading)
    observer.observe(document.body, {
       childList: true,
       subtree: true
@@ -55,9 +51,29 @@ function observeTable() {
    }, 5000);
 }
 
-// Start the process immediately or after the DOM is fully loaded
-if (document.readyState === 'loading') {
-   document.addEventListener('DOMContentLoaded', observeTable);
-} else {
+
+// Safe URL change detection
+function onUrlChange(callback) {
+   let lastUrl = location.href;
+   const checkUrl = () => {
+      if (location.href !== lastUrl) {
+         lastUrl = location.href;
+         callback();
+      }
+   };
+   window.addEventListener('popstate', checkUrl);
+   setInterval(checkUrl, 500);
+}
+
+function main() {
    observeTable();
+   onUrlChange(() => {
+      observeTable();
+   });
+}
+
+if (document.readyState === 'loading') {
+   document.addEventListener('DOMContentLoaded', main);
+} else {
+   main();
 }

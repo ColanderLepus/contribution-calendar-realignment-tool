@@ -9,7 +9,7 @@ function startWeekOnMonday(table) {
       tbody.appendChild(sundayRow);
       
       // 2. The Sunday row, when moved to the bottom, needs its contribution data shifted.
-      // Since the calendar is a rolling window, moving the Sunday row to the end
+      // Since the calendar graph is a rolling window, moving the Sunday row to the end
       // requires dropping the *oldest* Sunday contribution cell (index 1) to align the remaining 
       // contributions with the now Monday-started week columns
       const lastRow = tbody.rows[tbody.rows.length - 1];

@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Contribution Calendar Realignment Tool",
+  "name": "Contribution Graph Realignment Tool",
   "version": "1.0",
-  "description": "A browser extension by The GitHub Temporal Correction Initiative. Dedicated to restoring chronological integrity to GitHub's contribution calendar. Because Monday comes first!",
+  "description": "A browser extension by The GitHub Temporal Correction Initiative. Dedicated to restoring chronological integrity to GitHub's contribution graph. Because Monday comes first!",
   "content_scripts": [
     {
       "matches": ["https://github.com/*"],

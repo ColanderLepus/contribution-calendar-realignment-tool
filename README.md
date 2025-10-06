@@ -1,4 +1,4 @@
-# The GitHub Temporal Correction Initiative
+# Contribution Calendar Realignment Tool
 An opinionated browser extension committed to restoring chronological integrity on GitHub.
 
 ## Mission Statement

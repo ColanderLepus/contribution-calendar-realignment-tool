@@ -39,6 +39,9 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           run: |
+            # Use GitHub CLI to display all assets for the release
+            gh release view ${{ github.ref_name }} --json assets --template '{{ range .assets }}{{ .name }}\n{{ end }}'
+
             # The tag name (e.g., v1.0.0) is needed to target the correct Release
             TAG=${{ github.ref_name }}
             echo "Tag Name: $TAG"

@@ -33,7 +33,6 @@ jobs:
           with:
             files: ${{ env.ZIP_FILE_NAME }}
             draft: false
-            prelease: false
+            prerelease: false
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            

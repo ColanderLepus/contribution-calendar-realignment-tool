@@ -1,8 +1,14 @@
+// content.js
+// GitHub Contribution Graph Realignment Tool
+// Author: Temporal Correction Initiative
+// Description: A browser extension to modify GitHub contribution graphs to start weeks on Monday.
+
 function startWeekOnMonday(table) {
    
    // Prevent repeated modification
    if (table.dataset.weekMondayCorrected) return;
    
+   // Get the tbody and check for 7 rows (one per day)
    const tbody = table.querySelector('tbody');
    if (tbody && tbody.rows.length === 7) {
       

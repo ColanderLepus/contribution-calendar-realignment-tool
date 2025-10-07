@@ -14,11 +14,6 @@ jobs:
         - name: Checkout repository
           uses: actions/checkout@v4
 
-        - name: Package extension as XPI
-          run: |
-            cd extension
-            zip -r ../contribution-graph-realignment-tool.xpi .
-
         # 1. Package the extension as standard ZIP file (AMO requires ZIP for submission)
         - name: Create Firefox package (zip)
           run: |

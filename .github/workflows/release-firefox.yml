@@ -1,0 +1,26 @@
+name: Firefox Package Builder
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
+
+        - name: Package extension as XPI
+          run: |
+            cd extension
+            zip -r ../contribution-graph-realignment-tool.xpi .
+
+        - name: Upload XPI artifact
+          uses: actions/upload-artifact@v4
+          with:
+            name: contribution-graph-realignment-tool.xpi
+            path: contribution-graph-realignment-tool.xpi
+

@@ -39,9 +39,6 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           run: |
-            # Use GitHub CLI to display all assets for the release
-            gh release view ${{ github.ref_name }} --json assets --template '{{ range .assets }}{{ .name }}\n{{ end }}'
-
             # The tag name (e.g., v1.0.0) is needed to target the correct Release
             TAG=${{ github.ref_name }}
             echo "Tag Name: $TAG"
@@ -52,9 +49,15 @@ jobs:
             echo "Source ZIP: $SOURCE_ZIP"
             echo "Source TAR.GZ: $SOURCE_TAR_GZ"
 
-            echo "Attempting to delete default source archives from release..."
+            echo "Waiting 15 seconds for default source archives to be attached by GitHub..."
+            sleep 15
 
-            gh release delete-asset "$TAG_NAME" "$SOURCE_ZIP" --yes || echo "$SOURCE_ZIP not found, continuing..."
-            gh release delete-asset "$TAG_NAME" "$SOURCE_TAR_GZ" --yes || echo "$SOURCE_TAR_GZ not found, continuing..."
+            # Use GitHub CLI to display all assets (for debugging confirmation)
+            echo "Current Release Assets after delay:"
+            gh release view "$TAG" --json assets --template '{{ range .assets }}{{ .name }}\n{{ end }}'
+            
+            echo "Attempting to delete default source archives from release..."
+            gh release delete-asset "$TAG" "$SOURCE_ZIP" --yes || echo "$SOURCE_ZIP not found, continuing..."
+            gh release delete-asset "$TAG" "$SOURCE_TAR_GZ" --yes || echo "$SOURCE_TAR_GZ not found, continuing..."
 
             echo "Cleanup complete."

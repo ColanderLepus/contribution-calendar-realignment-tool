@@ -41,12 +41,25 @@ jobs:
           run: |
             # The tag name (e.g., v1.0.0) is needed to target the correct Release
             TAG_NAME=${{ github.ref_name }}
-            
-            echo "Searching for default source archives to delete for tag $TAG_NAME..."
-          
-            # Use 'gh' to find assets matching the default source code archive patterns
-            # and pipe their IDs to the delete command.
-            gh release delete-asset "$TAG_NAME" "source.zip" --yes || echo "source.zip not found, continuing..."
-            gh release delete-asset "$TAG_NAME" "source.tar.gz" --yes || echo "source.tar.gz not found, continuing..."
+            echo "Tag Name: $TAG_NAME"
 
+            # Strip the 'v' prefix if present
+            VERSION=${TAG_NAME#v}
+            echo "Version: $VERSION"
+
+            # The repo name
+            REPO=${{ github.repository }}
+            echo "Repository: $REPO"
+
+            # Construct the source archive names
+            SOURCE_ZIP="${REPO_NAME}-${VERSION_NUM}.zip"
+            SOURCE_TAR_GZ="${REPO_NAME}-${VERSION_NUM}.tar.gz"
+            echo "Source ZIP: $SOURCE_ZIP"
+            echo "Source TAR.GZ: $SOURCE_TAR_GZ"
+
+            echo "Attempting to delete default source archives from release..."
+
+            gh release delete-asset "$SOURCE_ZIP" --yes || echo "$SOURCE_ZIP not found, continuing..."
+            gh release delete-asset "$SOURCE_TAR_GZ" --yes || echo "$SOURCE_TAR_GZ not found, continuing..."
+            
             echo "Cleanup complete."

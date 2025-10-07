@@ -48,18 +48,18 @@ jobs:
             echo "Version: $VERSION"
 
             # The repo name
-            REPO=${{ github.repository }}
+            REPO=${{ github.event.repository.name }}
             echo "Repository: $REPO"
 
             # Construct the source archive names
-            SOURCE_ZIP="${REPO_NAME}-${VERSION_NUM}.zip"
-            SOURCE_TAR_GZ="${REPO_NAME}-${VERSION_NUM}.tar.gz"
+            SOURCE_ZIP="${REPO}-${VERSION}.zip"
+            SOURCE_TAR_GZ="${REPO}-${VERSION}.tar.gz"
             echo "Source ZIP: $SOURCE_ZIP"
             echo "Source TAR.GZ: $SOURCE_TAR_GZ"
 
             echo "Attempting to delete default source archives from release..."
 
-            gh release delete-asset "$SOURCE_ZIP" --yes || echo "$SOURCE_ZIP not found, continuing..."
-            gh release delete-asset "$SOURCE_TAR_GZ" --yes || echo "$SOURCE_TAR_GZ not found, continuing..."
-            
+            gh release delete-asset "$TAG_NAME" "$SOURCE_ZIP" --yes || echo "$SOURCE_ZIP not found, continuing..."
+            gh release delete-asset "$TAG_NAME" "$SOURCE_TAR_GZ" --yes || echo "$SOURCE_TAR_GZ not found, continuing..."
+
             echo "Cleanup complete."

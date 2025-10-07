@@ -40,20 +40,12 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           run: |
             # The tag name (e.g., v1.0.0) is needed to target the correct Release
-            TAG_NAME=${{ github.ref_name }}
-            echo "Tag Name: $TAG_NAME"
-
-            # Strip the 'v' prefix if present
-            VERSION=${TAG_NAME#v}
-            echo "Version: $VERSION"
-
-            # The repo name
-            REPO=${{ github.event.repository.name }}
-            echo "Repository: $REPO"
+            TAG=${{ github.ref_name }}
+            echo "Tag Name: $TAG"
 
             # Construct the source archive names
-            SOURCE_ZIP="${REPO}-${VERSION}.zip"
-            SOURCE_TAR_GZ="${REPO}-${VERSION}.tar.gz"
+            SOURCE_ZIP="${TAG}.zip"
+            SOURCE_TAR_GZ="${TAG}.tar.gz"
             echo "Source ZIP: $SOURCE_ZIP"
             echo "Source TAR.GZ: $SOURCE_TAR_GZ"
 

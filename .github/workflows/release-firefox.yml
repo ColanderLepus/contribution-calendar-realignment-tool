@@ -43,21 +43,18 @@ jobs:
             TAG=${{ github.ref_name }}
             echo "Tag Name: $TAG"
 
-            # Construct the source archive names
-            SOURCE_ZIP="${TAG}.zip"
-            SOURCE_TAR_GZ="${TAG}.tar.gz"
-            echo "Source ZIP: $SOURCE_ZIP"
-            echo "Source TAR.GZ: $SOURCE_TAR_GZ"
+            echo "==========================================================="
+            echo " DEBUGGING ASSET VISIBILITY"
+            echo "==========================================================="
 
-            echo "Waiting 15 seconds for default source archives to be attached by GitHub..."
-            sleep 15
+            # Add a delay, just in case the release is not immediately available
+            sleep 30
 
-            # Use GitHub CLI to display all assets (for debugging confirmation)
-            echo "Current Release Assets after delay:"
-            gh release view "$TAG" --json assets --template '{{ range .assets }}{{ .name }}\n{{ end }}'
-            
-            echo "Attempting to delete default source archives from release..."
-            gh release delete-asset "$TAG" "$SOURCE_ZIP" --yes || echo "$SOURCE_ZIP not found, continuing..."
-            gh release delete-asset "$TAG" "$SOURCE_TAR_GZ" --yes || echo "$SOURCE_TAR_GZ not found, continuing..."
+            echo "Listing all assets for the release:"
 
-            echo "Cleanup complete."
+            gh release view "$TAG" --json assets | jq -r '.assets[] | .id, .name' | while read ASSET_ID
+
+            do
+              read ASSET_NAME
+              echo "Asset ID: $ASSET_ID, Asset Name: $ASSET_NAME"
+            done

@@ -36,8 +36,17 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
         - name: Delete Default Source Code Archives
-          uses: devops-infra/action-delete-release-asset@v0.4.0
-          with:
-            asset_name: source-code.zip
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          run: |
+            # The tag name (e.g., v1.0.0) is needed to target the correct Release
+            TAG_NAME=${{ github.ref_name }}
+            
+            echo "Searching for default source archives to delete for tag $TAG_NAME..."
+          
+            # Use 'gh' to find assets matching the default source code archive patterns
+            # and pipe their IDs to the delete command.
+            gh release delete-asset "$TAG_NAME" "source.zip" --yes || echo "source.zip not found, continuing..."
+            gh release delete-asset "$TAG_NAME" "source.tar.gz" --yes || echo "source.tar.gz not found, continuing..."
+
+            echo "Cleanup complete."

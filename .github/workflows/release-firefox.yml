@@ -29,7 +29,15 @@ jobs:
           uses: softprops/action-gh-release@v1
           with:
             files: ${{ env.ZIP_FILE_NAME }}
+            name: Firefox Extension ${{ github.ref_name }}
             draft: false
             prerelease: false
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        - name: Delete Default Source Code Archives
+          uses: devops-infra/action-delete-release-asset@v0.4.0
+          with:
+            asset_name: source-code.zip
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

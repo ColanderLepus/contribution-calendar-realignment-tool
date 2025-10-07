@@ -34,27 +34,3 @@ jobs:
             prerelease: false
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-        - name: Delete Default Source Code Archives
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          run: |
-            # The tag name (e.g., v1.0.0) is needed to target the correct Release
-            TAG=${{ github.ref_name }}
-            echo "Tag Name: $TAG"
-
-            echo "==========================================================="
-            echo " DEBUGGING ASSET VISIBILITY"
-            echo "==========================================================="
-
-            # Add a delay, just in case the release is not immediately available
-            sleep 30
-
-            echo "Listing all assets for the release:"
-
-            gh release view "$TAG" --json assets | jq -r '.assets[] | .id, .name' | while read ASSET_ID
-
-            do
-              read ASSET_NAME
-              echo "Asset ID: $ASSET_ID, Asset Name: $ASSET_NAME"
-            done

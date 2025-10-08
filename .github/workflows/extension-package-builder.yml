@@ -1,5 +1,4 @@
-
-name: Firefox Package Builder
+name: Extension Package Builder
 
 on:
   push:

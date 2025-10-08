@@ -1,5 +1,4 @@
-
-name: Firefox Package Builder
+name: Extension Package Builder
 
 on:
   push:
@@ -11,6 +10,8 @@ jobs:
         runs-on: ubuntu-latest
         permissions:
             contents: write
+        env:
+            ZIP_NAME: contribution-graph-realignment-tool-${{ github.ref_name }}.zip
 
         steps:
         - name: Checkout repository
@@ -19,16 +20,14 @@ jobs:
         # 1. Package the extension as standard ZIP file
         - name: Create Extension Package
           run: |
-            ZIP_NAME=contribution-graph-realignment-tool-${{ github.ref_name }}.zip
             cd extension
             zip -r ../$ZIP_NAME .
-            echo "ZIP_FILE_NAME=$ZIP_NAME" >> $GITHUB_ENV
 
         # 2. Create the GitHub release and attach the ZIP file
         - name: Create GitHub Release
           uses: softprops/action-gh-release@v1
           with:
-            files: ${{ env.ZIP_FILE_NAME }}
+            files: ${{ env.ZIP_NAME }}
             name: Browser Extension ${{ github.ref_name }}
             draft: false
             prerelease: false

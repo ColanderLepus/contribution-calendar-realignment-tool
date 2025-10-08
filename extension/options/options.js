@@ -7,15 +7,15 @@ const storage = (typeof browser !== 'undefined' && browser.storage) ? browser.st
 
 // Load setting on page load
 window.addEventListener('DOMContentLoaded', () => {
-  // Get the setting from storage (default: true)
-  storage.sync.get({ enableRealignment: true }, (items) => {
-    // Set checkbox state based on stored value
-    checkbox.checked = items.enableRealignment;
-  });
+    // Get the setting from storage (default: true)
+    storage.sync.get({ enableRealignment: true }, (items) => {
+        // Set checkbox state based on stored value
+        checkbox.checked = items.enableRealignment;
+    });
 });
 
 // Save setting when changed
 checkbox.addEventListener('change', () => {
-  // Store the new value in browser/chrome storage
-  storage.sync.set({ enableRealignment: checkbox.checked });
+    // Store the new value in browser/chrome storage
+    storage.sync.set({ enableRealignment: checkbox.checked });
 });

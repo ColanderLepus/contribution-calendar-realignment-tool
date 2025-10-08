@@ -12,4 +12,9 @@
   "icons": {
     "16": "icon16.png"
   }
+  ,
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  }
 }

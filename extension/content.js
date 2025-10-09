@@ -83,10 +83,20 @@ function onUrlChange(callback) {
 }
 
 // Main entry point
+
+// Use browser.storage if available (preferred in modern browsers), otherwise fall back to chrome.storage.
+// This ensures compatibility across Chrome, Firefox, and other browsers supporting the WebExtension API.
+const storage = (typeof browser !== 'undefined' && browser.storage) ? browser.storage : chrome.storage;
+
 function main() {
-   observeTable();
-   onUrlChange(() => {
-      observeTable();
+   // Check if realignment is enabled before running
+   storage.sync.get({ enableRealignment: true }, (items) => {
+      if (items.enableRealignment) {
+         observeTable();
+         onUrlChange(() => {
+            observeTable();
+         });
+      }
    });
 }
 

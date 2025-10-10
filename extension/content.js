@@ -7,21 +7,31 @@ function startWeekOnMonday(table) {
    
    // Prevent repeated modification
    if (table.dataset.weekMondayCorrected) return;
-   
+
    // Get the tbody and check for 7 rows (one per day)
    const tbody = table.querySelector('tbody');
    if (tbody && tbody.rows.length === 7) {
-      
+      // Guard: Only move the row if the first cell of the first row is labeled 'Sun'
+      const firstRow = tbody.rows[0];
+      if (firstRow && firstRow.cells.length > 0) {
+         const labelCell = firstRow.cells[0];
+         const span = labelCell.querySelector('span[aria-hidden="true"]');
+         if (!span || span.textContent.trim() !== 'Sun') {
+            // Already Monday or not Sunday, skip correction
+            return;
+         }
+      }
+
       // 1. Move the Sunday row (index 0) to the bottom.
       const sundayRow = tbody.rows[0];
       tbody.appendChild(sundayRow);
-      
+
       // 2. Shift Sunday row's contribution data
       const lastRow = tbody.rows[tbody.rows.length - 1];
       if (lastRow.cells && lastRow.cells.length >= 2) {
          lastRow.deleteCell(1);
       }
-      
+
       // 3. Fix the visibility of the "Sun" label
       if (lastRow.cells && lastRow.cells.length > 0) {
          const labelCell = lastRow.cells[0];

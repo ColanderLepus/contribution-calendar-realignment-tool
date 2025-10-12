@@ -45,19 +45,18 @@ function startWeekOnMonday(table) {
         const sundayRow = tbody.rows[0];
         tbody.appendChild(sundayRow);
 
+        // All checks on lastRow.cells are redundant; we validated cell count before moving the row.
+
         // 2. Shift Sunday row's contribution data
         const lastRow = tbody.rows[tbody.rows.length - 1];
-        // No need to check lastRow.cells.length here; validation was performed before DOM manipulation.
         lastRow.deleteCell(1);
 
         // 3. Fix the visibility of the "Sun" label
-        if (lastRow.cells && lastRow.cells.length > 0) {
             const labelCell = lastRow.cells[0];
             const span = labelCell.querySelector('span[aria-hidden="true"]');
             if (span && span.hasAttribute('style')) {
                 const newStyle = span.getAttribute('style').replace('Circle(0)', 'None');
                 span.setAttribute('style', newStyle);
-            }
         }
 
         // 4. Mark as corrected

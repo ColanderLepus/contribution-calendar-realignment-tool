@@ -9,17 +9,36 @@ function startWeekOnMonday(table) {
 
     // Get the tbody and check for 7 rows (one per day)
     const tbody = table.querySelector('tbody');
-    if (tbody && tbody.rows.length === 7) {
-        // Guard: Only move the row if the first cell of the first row is labeled 'Sun'
-        const firstRow = tbody.rows[0];
-        if (firstRow && firstRow.cells.length > 0) {
-            const labelCell = firstRow.cells[0];
-            const span = labelCell.querySelector('span[aria-hidden="true"]');
-            if (!span || span.textContent.trim() !== 'Sun') {
-                // Already Monday or not Sunday, skip correction
-                return;
-            }
-        }
+    if (!tbody) {
+        console.error('[Contribution Graph Realignment] Failed: No <tbody> found in contribution graph table.');
+        return;
+    }
+    if (tbody.rows.length !== 7) {
+        console.error('[Contribution Graph Realignment] Failed: Contribution graph does not have 7 rows. Found:', tbody.rows.length);
+        return;
+    }
+
+    // Guard: Only move the row if the first cell of the first row is labeled 'Sun'
+    const firstRow = tbody.rows[0];
+    if (firstRow.cells.length === 0) {
+        console.error('[Contribution Graph Realignment] Failed: First row has no cells.');
+        return;
+    }
+
+    const span = firstRow.cells[0].querySelector('span[aria-hidden="true"]');
+    if (!span) {
+        console.error('[Contribution Graph Realignment] Failed: No label span found in first row.');
+        return;
+    }
+    if (span.textContent.trim() !== 'Sun') {
+        // Already Monday or not Sunday, skip correction (not an error)
+        return;
+    }
+    // Check that the Sunday row has at least 2 cells before proceeding
+    if (firstRow.cells.length < 2) {
+        console.error('[Contribution Graph Realignment] Failed: Sunday row does not have enough cells to shift contribution data.');
+        return;
+    }
 
     try {
         // 1. Move the Sunday row (index 0) to the bottom.
@@ -28,9 +47,7 @@ function startWeekOnMonday(table) {
 
         // 2. Shift Sunday row's contribution data
         const lastRow = tbody.rows[tbody.rows.length - 1];
-        if (lastRow.cells && lastRow.cells.length >= 2) {
-            lastRow.deleteCell(1);
-        }
+        lastRow.deleteCell(1);
 
         // 3. Fix the visibility of the "Sun" label
         if (lastRow.cells && lastRow.cells.length > 0) {

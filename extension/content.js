@@ -21,6 +21,7 @@ function startWeekOnMonday(table) {
             }
         }
 
+    try {
         // 1. Move the Sunday row (index 0) to the bottom.
         const sundayRow = tbody.rows[0];
         tbody.appendChild(sundayRow);
@@ -43,6 +44,8 @@ function startWeekOnMonday(table) {
 
         // 4. Mark as corrected
         table.dataset.weekMondayCorrected = 'true';
+    } catch (err) {
+        console.error('[Contribution Graph Realignment] Failed during DOM manipulation:', err);
     }
 }
 

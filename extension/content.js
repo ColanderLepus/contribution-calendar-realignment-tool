@@ -47,6 +47,7 @@ function startWeekOnMonday(table) {
 
         // 2. Shift Sunday row's contribution data
         const lastRow = tbody.rows[tbody.rows.length - 1];
+        // No need to check lastRow.cells.length here; validation was performed before DOM manipulation.
         lastRow.deleteCell(1);
 
         // 3. Fix the visibility of the "Sun" label

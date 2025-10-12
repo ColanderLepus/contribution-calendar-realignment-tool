@@ -3,33 +3,35 @@ name: Extension Package Builder
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        permissions:
-            contents: write
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    env:
+      ZIP_NAME: contribution-graph-realignment-tool-${{ github.ref_name }}.zip
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 1. Package the extension as standard ZIP file
+      - name: Create Extension Package
+        run: |
+          cd extension
+          zip -r ../$ZIP_NAME .
+
+      # 2. Create the GitHub release and attach the ZIP file
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{ env.ZIP_NAME }}
+          name: Browser Extension ${{ github.ref_name }}
+          draft: false
+          prerelease: false
         env:
-            ZIP_NAME: contribution-graph-realignment-tool-${{ github.ref_name }}.zip
-
-        steps:
-        - name: Checkout repository
-          uses: actions/checkout@v4
-
-        # 1. Package the extension as standard ZIP file
-        - name: Create Extension Package
-          run: |
-            cd extension
-            zip -r ../$ZIP_NAME .
-
-        # 2. Create the GitHub release and attach the ZIP file
-        - name: Create GitHub Release
-          uses: softprops/action-gh-release@v1
-          with:
-            files: ${{ env.ZIP_NAME }}
-            name: Browser Extension ${{ github.ref_name }}
-            draft: false
-            prerelease: false
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

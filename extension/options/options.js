@@ -3,7 +3,7 @@ const checkbox = document.getElementById('enableRealignment');
 
 // Use browser.storage if available (preferred in modern browsers), otherwise fall back to chrome.storage.
 // This ensures compatibility across Chrome, Firefox, and other browsers supporting the WebExtension API.
-const storage = (typeof browser !== 'undefined' && browser.storage) ? browser.storage : chrome.storage;
+const storage = typeof browser !== 'undefined' && browser.storage ? browser.storage : chrome.storage;
 
 // Load setting on page load
 window.addEventListener('DOMContentLoaded', () => {

@@ -52,11 +52,10 @@ function startWeekOnMonday(table) {
         lastRow.deleteCell(1);
 
         // 3. Fix the visibility of the "Sun" label
-            const labelCell = lastRow.cells[0];
-            const span = labelCell.querySelector('span[aria-hidden="true"]');
-            if (span && span.hasAttribute('style')) {
-                const newStyle = span.getAttribute('style').replace('Circle(0)', 'None');
-                span.setAttribute('style', newStyle);
+        const span = lastRow.cells[0].querySelector('span[aria-hidden="true"]');
+        if (span && span.hasAttribute('style')) {
+            const newStyle = span.getAttribute('style').replace('Circle(0)', 'None');
+            span.setAttribute('style', newStyle);
         }
 
         // 4. Mark as corrected

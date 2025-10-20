@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
-    "name": "Contribution Graph Realignment Tool",
-    "version": "1.1",
-    "description": "A browser extension by The GitHub Temporal Correction Initiative. Dedicated to restoring chronological integrity to GitHub's contribution graph. Because Monday comes first!",
+    "name": "Temporal Correction Suite",
+    "version": "1",
+    "description": "A browser extension by The GitHub Temporal Correction Initiative. We are dedicated to restoring chronological integrity to GitHub's contribution graph. Because Monday comes first! Also abolishes the tyranny of relative dates, offering absolute truth for those who reject ambiguity in their digital timeline.",
     "content_scripts": [
         {
             "matches": [

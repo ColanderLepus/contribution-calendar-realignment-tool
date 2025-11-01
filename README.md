@@ -3,8 +3,8 @@ A browser extension by The Temporal Correction Initiative, dedicated to restorin
 
 ## 📜 Mission Statement
 The Temporal Correction Initiative (TCI) exists to restore harmony between digital representation and temporal reality.
-For too long, developers worldwide have endured an unnatural ordering of days, a system that places Sunday, a day of rest, at the forefront of productivity.
-We reject this inversion of logic and pledge to uphold the universally acknowledged truth: **The week begins on Monday.**
+For too long, developers worldwide have been forced to endured a distorted calender with an unnatural ordering of days, a system that places Sunday, a day of rest, at the forefront of productivity.
+We reject this absurdity, this inversion of logic, and pledge to uphold the universally acknowledged truth: **The week begins on Monday.**
 
 ## 🧭 Founding Principles
 1. **Temporal Integrity:** Time shall flow as it was intended: From Monday through Sunday, without distortion.

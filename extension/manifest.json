@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Temporal Correction Suite",
     "version": "1.0",
-    "description": "A browser extension by The Temporal Correction Initiative. Overthrowing the tyranny of chronological misrepresentation by realigning GitHub's contribution graph and restoring Monday's rightful primacy. Abolishing the absurdity of horological indeterminacy by replacing relative dates with absolutes and reconstituting temporal precision as a fundamental principle.",
+    "description": "A temporal insurrection: restoring Monday’s rightful primacy and abolishing the absurdity of indeterminacy.",
     "content_scripts": [
         {
             "matches": [

@@ -1,7 +1,7 @@
 # 📅 Contribution Graph Realignment Tool
 A browser extension by The Temporal Correction Initiative.  
 * Overthrowing the tyranny of chronological misrepresentation by realigning GitHub's contribution graph and restoring Monday's rightful primacy.  
-* Abolishing the absurdity of horological indeterminacy by replacing relative dates with absolutes and reconstituting temporal precision as a fundamental principle.
+* Abolishing the absurdity of chronometric indeterminacy by replacing relative dates with absolutes and reconstituting temporal precision as a fundamental principle.
 
 ## 📜 Mission Statement
 The Temporal Correction Initiative (TCI) exists to restore harmony between digital representation and temporal reality.
